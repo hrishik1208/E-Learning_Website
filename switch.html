@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Swich bulb</title>
+</head>
+<body>
+<center>
+<img id="h" src="image/calender.png">
+<!-- </ce -->
+<button id="g">Turn On</button>
+</center>
+<script type="text/javascript">
+	let a=document.getElementById('h');
+	let b=document.getElementById('g');
+	b.addEventListener("click", hello);
+	function hello(e){
+		if(b.textContent.includes('On')){
+			a.src="image/jee10.png";
+			b.textContent="Turn Off";
+		}
+		else{
+			a.src="image/calender.png";
+			b.textContent="Turn On";	
+		}
+	}
+</script>
+</body>
+</html>

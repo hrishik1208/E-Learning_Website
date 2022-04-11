@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PAYMENT FORM</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style type="text/css">
+		
+	</style>
+</head>
+<body>
+	<form onsubmit="return val1()" name="google-sheet" autocomplete="off" method="POST" style="margin-left: 600px; margin-right: 480px;margin-top: 50px;padding: 30px; border: 2px solid black;background-color: #F8F8F8; ">
+		<center><h2 style="color: green; margin: 20px;" >Payment Gateway</h2></center>
+		<span>Card Holder : </span><br>
+		<img width="20px"  src="image/person.png"><input id="ch" style="width: 325px;" type="text" name="Card Holder" placeholder="Card Holder"><br><br><span id="errorch" style="color: red; font-size: 20px;"></span><br>
+		<span>Card Number : </span><br>
+		<img width="20px" src="image/card_number.png"><input id="cn" style="width: 325px;" type="number" name="Card Number" placeholder="Card Number"><br><span id="errorcn" style="color: red; font-size: 20px;"></span><br><br>
+		<span>Expiry Date : </span><br>
+		<img style="margin-top: 5px;" width="20px;" src="image/calender.png"><input id="ed" style="width: 325px;" type="number" name="Expiry Date" placeholder="00 / 00"><br><span id="errored" style="color: red; font-size: 20px;"></span><br><br>
+		<span>CVC : </span><br><br>
+		<img width="20px" src="image/lock.png"><input style="width: 325px;" id="cvc" type="password" name="CVC" placeholder="000"><br>
+		<span id="errorcvc" style="color: red; font-size: 20px;"></span><br><br>
+		<center><button style="background-color: green; color: white; cursor: pointer;" type="submit">Pay</button><br><br>
+		<a style="color: green;" href="13_checkout.html">ORDER DETAILS</a></center>
+	</form>
+<script type="text/javascript">
+	function val1(){
+		var ch1 = document.getElementById('ch').value;
+		var cn1= document.getElementById('cn').value;
+		var ed1= document.getElementById('ed').value;
+		var cvc1 = document.getElementById('cvc').value;
+
+		var chcheck = /^[A-Z]{3,30}$/;
+		var cncheck = /^[0-9]{16}$/;
+		var edcheck = /^[0-9]{4}$/;
+		var cvccheck = /^[0-9]{3}$/;
+
+		if(chcheck.test(ch1)){
+			document.getElementById('errorch').innerHTML = " ";
+		}
+		else{
+			document.getElementById('errorch').innerHTML = "**Please only write Capital letters";
+			return false;
+		}
+		if(cncheck.test(cn1)){
+			document.getElementById('errorcn').innerHTML = " ";
+		}
+		else{
+			document.getElementById('errorcn').innerHTML = "**Please Write a valid card number of 16 digits";
+			return false;
+		}
+		if(edcheck.test(ed1)){
+			document.getElementById('errored').innerHTML = " ";
+		}
+		else{
+			document.getElementById('errored').innerHTML = "**Please write 2 digit month and 2 last digit year";
+			return false;
+		}
+		if(cvccheck.test(cvc1)){
+			document.getElementById('errorcvc').innerHTML = " ";
+		}
+		else{
+			document.getElementById('errorcvc').innerHTML = "**please enter a valid 3 digit cvc";
+			return false;
+		}
+	}
+</script>
+<script type="text/javascript">
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbw3RHnpkp8N4OW9PLY38a5ES4Uj-h_FqmdhJqns9CkAKnjW4Z89Wq3ylKwY_QniQWS1LQ/exec'
+            const form = document.forms['google-sheet']
+          
+            form.addEventListener('submit', e => {
+              e.preventDefault()
+              fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => alert("Please see order details."))
+                .catch(error => console.error('Error!', error.message))
+            })
+</script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+</body>
+</html>
